@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/DMPortal">
+  <ResourceLink name="jdbc/config-prod" type="javax.sql.DataSource" global="jdbc/dmweb" /> 
+  <ResourceLink name="jdbc/config-srs" type="javax.sql.DataSource" global="jdbc/dmweb" /> 
+  <Logger className="org.apache.catalina.logger.FileLogger" prefix="DMPortal" suffix=".log" timestamp="true" />
+</Context>
