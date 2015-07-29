@@ -12,7 +12,6 @@
     <body>
         <jsp:useBean id="req" class="org.lsst.dm.portal.DMRequest" scope="session"/>
         <jsp:setProperty name="req" property="*"/>        
-        <jsp:setProperty name="req" property="jobName" value="${param.jobName}"/>
         <jsp:setProperty name="req" property="userName" value="${param.userName}"/>
         <jsp:setProperty name="req" property="email" value="${param.email}"/>
         <jsp:setProperty name="req" property="location" value="${param.location}"/>
@@ -35,9 +34,9 @@
         <dp:showMessages messages="${task.messages}"/>
 
         <dp:parameterTable>
-            <dp:displayRow title="Registration id" value="${req.jobName}" />
             <dp:displayRow title="Submitter's name" value="${req.userName}"/>
             <dp:displayRow title="Submitter's e-mail" value="${req.email}"/>
+            <dp:displayRow title="User Comment" value="${req.userComment}"/>
             <dp:displayRow title="Data Location" value="${req.location}"/>
             <dp:displayRow title="Short name of dataset" value="${req.shortName}" />
             <dp:displayRow title="Full Description of dataset" value="${req.description}" />
