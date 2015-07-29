@@ -9,8 +9,7 @@
         <title>LSST Data Management Registration Submit</title>
     </head>
     <body>
-        <dp:generic-submit task="${task}" var="job">
-        </dp:generic-submit>
+        <dp:generic-submit task="${task}" var="job"/>
 
         <h1>LSST Data Management Registration submitted</h1>
 

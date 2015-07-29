@@ -83,7 +83,7 @@ public class DMTask extends Task {
                     rs.insertRow();
                 }
             }
-            return new PipelineJob(jobName, id, null, "LSST-DM", null);
+            return new PipelineJob(null, id, null, "LSST-DM", jobName);
         } catch (SQLException ex) {
             throw new RuntimeException("Error commiting registration request",ex);
         }
