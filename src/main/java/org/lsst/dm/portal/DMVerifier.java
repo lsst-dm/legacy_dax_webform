@@ -38,7 +38,13 @@ class DMVerifier extends Verifier {
         }
         if (!emailRegexp.matcher(request.getEmail()).matches()) {
             addVerifyMessage("EMailInvalid","Submitter's e-mail is invalid", VerifierMessage.VerifyStatus.ERROR);
-        }        
+        }
+        if (request.getLocation().isEmpty()) {
+            addVerifyMessage("ShortNameMissing","Data location is missing", VerifierMessage.VerifyStatus.ERROR);
+        }  
+        if (request.getShortName().isEmpty()) {
+            addVerifyMessage("ShortNameMissing","Short name is missing", VerifierMessage.VerifyStatus.ERROR);
+        }    
         String metaData = request.getMetaData();
         if (metaData!=null) {
             Matcher matcher = metaRegexp.matcher(metaData);

@@ -20,24 +20,24 @@
         </p>
         <form method="POST" action="confirm.jsp">
             <dp:parameterTable>
-                <dp:textRow property="userName" title="Submitter's name" value="${req.userName}" size="80">
+                <dp:textRow property="userName" title="Submitter's name <b>(*)</b>"  value="${req.userName}" size="80">
                     <br>Please enter your full name
                     <dp:helpLink id="R4w0Cw"/>
                 </dp:textRow>
-                <dp:textRow property="email" title="Submitter's e-mail" value="${req.email}" size="80">
+                <dp:textRow property="email" title="Submitter's e-mail <b>(*)</b>" value="${req.email}" size="80">
                     <br>Please enter your e-mail address. Progress updates will be sent to this address.
                 </dp:textRow>
                 <dp:textRow property="userComment" title="User Comment" value="${req.userComment}" size="80">
                     <br>Brief explanation of registration request.
                 </dp:textRow>  
-                <dp:textRow property="location" title="Data Location" value="${req.location}" size="80">
+                <dp:textRow property="location" title="Data Location <b>(*)</b>" value="${req.location}" size="80">
                     <br>The location (at NCSA) of the data to be imported
                 </dp:textRow>
-                <dp:textRow property="shortName" title="Short name of dataset" value="${req.shortName}" size="80"/>
+                <dp:textRow property="shortName" title="Short name of dataset <b>(*)</b>" value="${req.shortName}" size="80"/>
                 <dp:textRow property="description" title="Full Description of dataset" value="${req.description}" size="80" rows="5">
                 </dp:textRow>
                 <tr>
-                    <td class="key">Repo Type</td>
+                    <td class="key">Repo Type <b>(*)</b></td>
                     <td class="value">
                         <select size="1" name="type">
                             <option ${req.type=="db"?"selected":""}>db</option>
@@ -49,7 +49,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="key">Owner Type</td>
+                    <td class="key">Owner Type <b>(*)</b></td>
                     <td class="value">
                         <select size="1" name="owner">
                             <option ${req.owner=="production"?"selected":""}>production</option>
@@ -61,7 +61,7 @@
                 <dp:textRow property="ogname" title="Owner or Group name" value="${req.ogname}" size="80"/>
                 <dp:textRow property="dataRelease" title="Data Release" value="${phosimRequest.dataRelease}" size="80"/>
                 <tr>
-                    <td class="key">Priority</td>
+                    <td class="key">Priority <b>(*)</b></td>
                     <td class="value">
                         <select size="1" name="priority">
                             <option ${req.priority=="scratch"?"selected":""}>scratch</option>
@@ -71,7 +71,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="key">Availability</td>
+                    <td class="key">Availability <b>(*)</b></td>
                     <td class="value">
                         <select size="1" name="availability">
                             <option ${req.priority=="scratch"?"selected":""}>loading</option>
@@ -81,7 +81,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="key">Accessibility</td>
+                    <td class="key">Accessibility <b>(*)</b></td>
                     <td class="value">
                         <select size="1" name="accessibility">
                             <option ${req.priority=="scratch"?"selected":""}>public</option>
@@ -90,7 +90,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="key">Project</td>
+                    <td class="key">Project <b>(*)</b></td>
                     <td class="value">
                         <select size="1" name="project">
                             <option ${req.priority=="LSST"?"selected":""}>LSST</option>
@@ -98,7 +98,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="key">Level</td>
+                    <td class="key">Level <b>(*)</b></td>
                     <td class="value">
                         <select size="1" name="level">
                             <option ${req.priority=="DC"?"selected":""}>DC</option>
@@ -110,7 +110,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="key">Corresponding dataset type</td>
+                    <td class="key">Corresponding dataset type <b>(*)</b></td>
                     <td class="value">
                         <select size="1" name="correspondingType">
                             <option ${req.correspondingType=="None"?"selected":""}>None</option>
@@ -130,7 +130,7 @@
                 <dp:textRow property="metaData" title="Meta-data" value="${req.metaData}" size="80" rows="5">
                     <br>Add arbitrary meta-data, use name=value one per line.
                 </dp:textRow>
-                <tr><td>&nbsp;</td><td><input type="submit" value="Proceed" name="B1"></td></tr>
+                <tr><td>&nbsp;</td><td><b>(*)</b> = required item&nbsp;&nbsp;&nbsp;<input type="submit" value="Proceed" name="B1"></td></tr>
             </dp:parameterTable>
         </form>
     </body>
