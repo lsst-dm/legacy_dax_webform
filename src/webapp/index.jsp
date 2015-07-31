@@ -7,6 +7,7 @@
 <html>
     <head>
         <title>LSST Data Management Registration Portal</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     </head>
     <body>
         <c:if test="${empty req || !empty param.id}">
@@ -51,14 +52,39 @@
                 <tr>
                     <td class="key">Owner Type <b>(*)</b></td>
                     <td class="value">
-                        <select size="1" name="owner">
+                        <select size="1" name="owner" onchange="ownerChanged()">
                             <option ${req.owner=="production"?"selected":""}>production</option>
                             <option ${req.owner=="group"?"selected":""}>group</option>
                             <option ${req.owner=="user"?"selected":""}>user</option>
                         </select>
                     </td>
                 </tr>
-                <dp:textRow property="ogname" title="Owner or Group name" value="${req.ogname}" size="80"/>
+                <tr id="ogname">
+                    <td class="key" id="ognameLabel">Owner <b>(*)</b></td>
+                    <td class="value">
+                        <input type="text" name="ogname" value="${req.ogname}" size="80"/>
+                    </td>
+                </tr>
+                <script>
+                    function ownerChanged() {
+                        value = $("select[name=owner] option:selected").text();
+                        switch (value) {
+                            case 'production':
+                                $('#ogname').hide();
+                                break;
+                            case 'group':
+                                $('#ognameLabel').html('Group <b>(*)</b>');
+                                $('#ogname').show();
+                                break;
+                            default:
+                                $('#ognameLabel').html('Owner <b>(*)</b>');
+                                $('#ogname').show();
+                        }
+                    }
+                    $(document).ready(function () {
+                        ownerChanged();
+                    });
+                </script>
                 <dp:textRow property="dataRelease" title="Data Release" value="${phosimRequest.dataRelease}" size="80"/>
                 <tr>
                     <td class="key">Priority <b>(*)</b></td>
@@ -112,26 +138,42 @@
                 <tr>
                     <td class="key">Corresponding dataset type <b>(*)</b></td>
                     <td class="value">
-                        <select size="1" name="correspondingType">
+                        <select size="1" name="correspondingType" onchange="correspondingTypeChanged()">
                             <option ${req.correspondingType=="None"?"selected":""}>None</option>
                             <option ${req.correspondingType=="db"?"selected":""}>db</option>
                             <option ${req.correspondingType=="file"?"selected":""}>file</option>
+                            <option ${req.correspondingType=="dir"?"selected":""}>dir</option>
                             <option ${req.correspondingType=="butler"?"selected":""}>butler</option>
                         </select>
                     </td>
                 </tr>
-                <tr>
-                    <td class="key">Corresponding dataset Id</td>
+                <tr id="correspondingId">
+                    <td class="key">Corresponding dataset Id <b>(*)</b></td>
                     <td class="value">
                         <select size="1" name="correspondingId">
                         </select>
                     </td>
                 </tr>
+                <script>
+                    function correspondingTypeChanged() {
+                        value = $("select[name=correspondingType] option:selected").text();
+                        switch (value) {
+                            case 'None':
+                                $('#correspondingId').hide();
+                                break;
+                            default:
+                                $('#correspondingId').show();
+                        }
+                    }
+                    $(document).ready(function () {
+                        correspondingTypeChanged();
+                    });
+                </script>
                 <dp:textRow property="metaData" title="Meta-data" value="${req.metaData}" size="80" rows="5">
                     <br>Add arbitrary meta-data, use name=value one per line.
                 </dp:textRow>
                 <tr><td>&nbsp;</td><td><b>(*)</b> = required item&nbsp;&nbsp;&nbsp;<input type="submit" value="Proceed" name="B1"></td></tr>
-            </dp:parameterTable>
+                    </dp:parameterTable>
         </form>
     </body>
 </html>

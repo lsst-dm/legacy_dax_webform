@@ -20,8 +20,8 @@ class DMVerifier extends Verifier {
     private DMRequest request;
     private final DataServerConfig dataServer;
     Pattern emailRegexp = Pattern.compile(".+@.+\\..+");
-    Pattern metaRegexp = Pattern.compile("^\\s*(\\w+)\\s*=\\s*(.*)$",Pattern.MULTILINE);
-    Map<String,String> meta = new HashMap<>();
+    Pattern metaRegexp = Pattern.compile("^\\s*(\\w+)\\s*=\\s*(.*)$", Pattern.MULTILINE);
+    Map<String, String> meta = new HashMap<>();
 
     DMVerifier(DataServerConfig config) {
         this.dataServer = config;
@@ -34,29 +34,35 @@ class DMVerifier extends Verifier {
         clear();
 
         if (request.getUserName().isEmpty()) {
-            addVerifyMessage("SubmitterNameRequired","Submitter's name is required", VerifierMessage.VerifyStatus.ERROR);
+            addVerifyMessage("SubmitterNameRequired", "Submitter's name is required", VerifierMessage.VerifyStatus.ERROR);
         }
         if (!emailRegexp.matcher(request.getEmail()).matches()) {
-            addVerifyMessage("EMailInvalid","Submitter's e-mail is invalid", VerifierMessage.VerifyStatus.ERROR);
+            addVerifyMessage("EMailInvalid", "Submitter's e-mail is invalid", VerifierMessage.VerifyStatus.ERROR);
         }
         if (request.getLocation().isEmpty()) {
-            addVerifyMessage("ShortNameMissing","Data location is missing", VerifierMessage.VerifyStatus.ERROR);
-        }  
+            addVerifyMessage("ShortNameMissing", "Data location is missing", VerifierMessage.VerifyStatus.ERROR);
+        }
         if (request.getShortName().isEmpty()) {
-            addVerifyMessage("ShortNameMissing","Short name is missing", VerifierMessage.VerifyStatus.ERROR);
-        }    
+            addVerifyMessage("ShortNameMissing", "Short name is missing", VerifierMessage.VerifyStatus.ERROR);
+        }
+        if (!"production".equals(request.getOwner()) && request.getOgname().isEmpty()) {
+            addVerifyMessage("OGnameMissing", "Owner or group name missing", VerifierMessage.VerifyStatus.ERROR);
+        }
+        if (!"None".equals(request.getCorrespondingType()) && request.getCorrespondingId().isEmpty()) {
+            addVerifyMessage("CorrespondingIdMissing", "Corresponding id missing", VerifierMessage.VerifyStatus.ERROR);
+        }
         String metaData = request.getMetaData();
-        if (metaData!=null) {
+        if (metaData != null) {
             Matcher matcher = metaRegexp.matcher(metaData);
             while (matcher.find()) {
-                meta.put(matcher.group(1),matcher.group(2));
+                meta.put(matcher.group(1), matcher.group(2));
                 System.out.println(matcher.group(0));
             }
             if (!matcher.hitEnd()) {
-                addVerifyMessage("MalformedMetaData","Meta data is not well formed", VerifierMessage.VerifyStatus.ERROR);                     
+                addVerifyMessage("MalformedMetaData", "Meta data is not well formed", VerifierMessage.VerifyStatus.ERROR);
             }
         }
-        
+
         return getStatus();
     }
 
