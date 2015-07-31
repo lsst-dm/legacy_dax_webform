@@ -1,9 +1,11 @@
 package org.lsst.dm.portal;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Instant;
 import java.util.Map;
 import org.srs.dataportal.model.DataServerConfig;
 import org.srs.dataportal.model.Task;
@@ -119,24 +121,27 @@ public class DMTask extends Task {
      * @throws SQLException
      */
     private int recordOfficialRequest(Connection connection) throws SQLException {
+        Date now = new Date(Instant.now().toEpochMilli());
         PreparedStatement stmt = connection.prepareStatement(
                 "select repoId,url,shortName,description,repoType,"
-                + "dataRelease ,priorityLevel ,availability,accessibility "
+                + "dataRelease ,priorityLevel ,availability,accessibility, "
+                + "lsstLevel, registrationTime "
                 + "from Repo where repoId is null", ResultSet.FETCH_FORWARD, ResultSet.CONCUR_UPDATABLE);
+        // Note: Some columns remain unhandled for now, particularly those involving references to 
+        // other tables. It is not clear that these items should really be filled in here, as opposed
+        // to the process which actually handles the registration. Either way a future update will address these items.
         ResultSet rs = stmt.executeQuery();
         rs.moveToInsertRow();
         rs.updateString(2, request.getLocation());
         rs.updateString(3, request.getShortName());
         rs.updateString(4, request.getDescription());
         rs.updateString(5, request.getType());
-        //rs.updateString(8, request.getOwner());
-        //rs.updateString(6, request.getOgname());
         rs.updateString(6, request.getDataRelease());
         rs.updateString(7, request.getPriority());
         rs.updateString(8, request.getAvailability());
         rs.updateString(9, request.getAccessibility());
-        //rs.updateString(11, request.getCorrespondingType());
-        //rs.updateString(15, request.getCorrespondingId());
+        rs.updateString(10, request.getLevel());
+        rs.updateDate(11, now);
         rs.insertRow();
         // See http://dev.mysql.com/doc/connector-j/en/connector-j-usagenotes-last-insert-id.html
         rs.last();
