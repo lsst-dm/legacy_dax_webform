@@ -42,6 +42,7 @@
                         <select size="1" name="type">
                             <option ${req.type=="db"?"selected":""}>db</option>
                             <option ${req.type=="file"?"selected":""}>file</option>
+                            <option ${req.type=="dir"?"selected":""}>dir</option>
                             <option ${req.type=="butler"?"selected":""}>butler</option>
                             <option ${req.type=="custom"?"selected":""}>custom</option>
                         </select>
@@ -89,6 +90,26 @@
                     </td>
                 </tr>
                 <tr>
+                    <td class="key">Project</td>
+                    <td class="value">
+                        <select size="1" name="project">
+                            <option ${req.priority=="LSST"?"selected":""}>LSST</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="key">Level</td>
+                    <td class="value">
+                        <select size="1" name="level">
+                            <option ${req.priority=="DC"?"selected":""}>DC</option>
+                            <option ${req.priority=="L1"?"selected":""}>L1</option>
+                            <option ${req.priority=="L2"?"selected":""}>L2</option>
+                            <option ${req.priority=="L3"?"selected":""}>L3</option>
+                            <option ${req.priority=="dev"?"selected":""}>dev</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
                     <td class="key">Corresponding dataset type</td>
                     <td class="value">
                         <select size="1" name="correspondingType">
@@ -110,7 +131,7 @@
                     <br>Add arbitrary meta-data, use name=value one per line.
                 </dp:textRow>
                 <tr><td>&nbsp;</td><td><input type="submit" value="Proceed" name="B1"></td></tr>
-             </dp:parameterTable>
+            </dp:parameterTable>
         </form>
     </body>
 </html>

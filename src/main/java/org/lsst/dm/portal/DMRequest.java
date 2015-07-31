@@ -25,6 +25,8 @@ public class DMRequest extends Request {
     private String metaData;
     private String correspondingType;
     private String correspondingId;
+    private String project = "LSST";
+    private String level = "dev";
 
     /**
      * Creates a new instance of Pruner
@@ -167,6 +169,22 @@ public class DMRequest extends Request {
 
     public void setCorrespondingId(String correspondingId) {
         this.correspondingId = correspondingId;
+    }
+
+    public String getProject() {
+        return project;
+    }
+
+    public void setProject(String project) {
+        this.project = project;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
     }
 
 }

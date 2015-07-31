@@ -68,7 +68,7 @@ public class DMTask extends Task {
     private int recordRegistrationRequest(final Connection connection) throws SQLException {
         PreparedStatement stmt = connection.prepareStatement(
                 "select id,submitter_name,submitter_email,location,short_name,description,repo_type,owner_type,"
-                + "ogname,data_release,priority,availability,accessibility,corresponding_type,corresponding_id "
+                + "ogname,data_release,priority,availability,accessibility,project,level,corresponding_type,corresponding_id "
                 + "from registration_request where id is null", ResultSet.FETCH_FORWARD, ResultSet.CONCUR_UPDATABLE);
         ResultSet rs = stmt.executeQuery();
         rs.moveToInsertRow();
@@ -84,8 +84,10 @@ public class DMTask extends Task {
         rs.updateString(11, request.getPriority());
         rs.updateString(12, request.getAvailability());
         rs.updateString(13, request.getAccessibility());
-        rs.updateString(14, request.getCorrespondingType());
-        //rs.updateString(15, request.getCorrespondingId());
+        rs.updateString(14, request.getProject());
+        rs.updateString(15, request.getLevel());
+        rs.updateString(16, request.getCorrespondingType());
+        //rs.updateString(17, request.getCorrespondingId());
         rs.insertRow();
         // See http://dev.mysql.com/doc/connector-j/en/connector-j-usagenotes-last-insert-id.html
         rs.last();

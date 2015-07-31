@@ -24,8 +24,8 @@
         <jsp:setProperty name="req" property="priority" value="${param.priority}"/>
         <jsp:setProperty name="req" property="availability" value="${param.availability}"/>
         <jsp:setProperty name="req" property="accessibility" value="${param.accessibility}"/>
-        <jsp:setProperty name="req" property="correspondingType" value="${param.correspondingType}"/>
-        <jsp:setProperty name="req" property="correspondingId" value="${param.correspondingId}"/>
+        <jsp:setProperty name="req" property="project" value="${param.project}"/>
+        <jsp:setProperty name="req" property="level" value="${param.level}"/>
         <jsp:setProperty name="req" property="metaData" value="${param.metaData}"/>
         
         <dp:createTask var="task" className="org.lsst.dm.portal.DMTask" request="${req}" userInfo="${dm:createUser(param.userName,param.email)}" clientVersion="${initParam.version}"/>
@@ -47,6 +47,8 @@
             <dp:displayRow title="Priority" value="${req.priority}"/>
             <dp:displayRow title="Availability" value="${req.availability}"/>
             <dp:displayRow title="Accessibility" value="${req.accessibility}"/>
+            <dp:displayRow title="Project" value="${req.project}"/>
+            <dp:displayRow title="Level" value="${req.level}"/>
             <dp:displayRow title="CorrespondingType" value="${req.correspondingType}"/>
             <dp:displayRow title="CorrespondingId" value="${req.correspondingId}"/>
             <tr>
