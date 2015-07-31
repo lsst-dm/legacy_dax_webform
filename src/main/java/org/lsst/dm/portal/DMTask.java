@@ -87,7 +87,7 @@ public class DMTask extends Task {
         rs.updateString(14, request.getProject());
         rs.updateString(15, request.getLevel());
         rs.updateString(16, request.getCorrespondingType());
-        //rs.updateString(17, request.getCorrespondingId());
+        rs.updateString(17, request.getCorrespondingId());
         rs.insertRow();
         // See http://dev.mysql.com/doc/connector-j/en/connector-j-usagenotes-last-insert-id.html
         rs.last();

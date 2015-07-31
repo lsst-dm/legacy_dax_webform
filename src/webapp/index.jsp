@@ -150,8 +150,7 @@
                 <tr id="correspondingId">
                     <td class="key">Corresponding dataset Id <b>(*)</b></td>
                     <td class="value">
-                        <select size="1" name="correspondingId">
-                        </select>
+                        <input type="text" name="correspondingId" value="${req.correspondingId}" size="80"/>
                     </td>
                 </tr>
                 <script>
