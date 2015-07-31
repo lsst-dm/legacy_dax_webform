@@ -1,0 +1,58 @@
+table.propertyTable {
+   width: 80%;
+   border: 2px;
+   padding: 2px;
+   margin-left: auto;
+   margin-right: auto;
+   background-color: #ffffcc;
+}
+
+table.propertyTable th {
+   background-color: #ccffcc;
+}
+table.propertyTable td.key {
+   text-align: right;
+   width: 20%
+}
+
+table.propertyTable td.value {
+   background-color: #00ffff;
+}
+
+p.error 
+{
+   color: red;
+}
+
+p.warn 
+{
+   color: orange;
+}
+
+table.welcome {
+        margin: 10px;
+}
+
+table.welcome td.l {
+	text-align :   left;
+        font-weight:   bold;
+	padding-left:   0.5em;
+	padding-bottom: 2.0em;
+        vertical-align: top;
+}
+table.welcome td.d {
+	text-align :   left;
+	padding-left:   3.0em;
+	padding-right:  3.0em;
+	padding-bottom: 2.0em;
+        vertical-align: top;
+}
+
+div.scroll {
+	height: 150px;
+	width: 300px;
+	overflow: auto;
+	border: 1px solid #666;
+	background-color: white;
+	padding: 1px;
+}
